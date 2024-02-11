@@ -1,0 +1,28 @@
+#include <stdio.h>
+#include <string.h>
+
+int main() {
+    char inputString[100]; // Assuming the input string won't exceed 100 characters
+    char reversedString[100];
+    int length, i, j;
+
+    // Input
+    printf("Enter a string: ");
+    gets(inputString);
+
+    // Calculate length of the string
+    length = strlen(inputString);
+
+    // Reverse the string
+    for (i = length - 1, j = 0; i >= 0; i--, j++) {
+        reversedString[j] = inputString[i];
+    }
+
+    // Null-terminate the reversed string
+    reversedString[j] = '\0';
+
+    // Output
+    printf("Reversed string: %s\n", reversedString);
+
+    return 0;
+}
