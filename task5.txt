@@ -1,0 +1,48 @@
+#include <stdio.h>
+#include <stdlib.h>
+
+void copy_file(const char *source_file, const char *destination_file) {
+    FILE *source, *destination;
+    char ch;
+
+    // Open the source file in read mode
+    source = fopen(source_file, "r");
+    if (source == NULL) {
+        printf("Unable to open source file.\n");
+        exit(EXIT_FAILURE);
+    }
+
+    // Open the destination file in write mode
+    destination = fopen(destination_file, "w");
+    if (destination == NULL) {
+        printf("Unable to open destination file.\n");
+        fclose(source);
+        exit(EXIT_FAILURE);
+    }
+
+    // Copy contents from source to destination
+    while ((ch = fgetc(source)) != EOF) {
+        fputc(ch, destination);
+    }
+
+    printf("File copied successfully.\n");
+
+    // Close files
+    fclose(source);
+    fclose(destination);
+}
+
+int main() {
+    char source_file[100], destination_file[100];
+
+    // Prompt user to input source and destination file names
+    printf("Enter the name of the source file: ");
+    scanf("%s", source_file);
+    printf("Enter the name of the destination file: ");
+    scanf("%s", destination_file);
+
+    // Copy contents from source to destination
+    copy_file(source_file, destination_file);
+
+    return 0;
+}
