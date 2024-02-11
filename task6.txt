@@ -1,0 +1,46 @@
+#include <stdio.h>
+#include <string.h>
+#include <ctype.h>
+
+int main() {
+    char input[100];
+    int i, j;
+    int isPalindrome = 1; // Assume it's a palindrome initially
+
+    // Input from the user
+    printf("Enter a word or phrase: ");
+    fgets(input, sizeof(input), stdin);
+
+    // Remove newline character if present
+    input[strcspn(input, "\n")] = '\0';
+
+    // Convert input to lowercase for case-insensitive comparison
+    for (i = 0; input[i] != '\0'; i++) {
+        input[i] = tolower(input[i]);
+    }
+
+    // Check if the input is a palindrome
+    for (i = 0, j = strlen(input) - 1; i < j; i++, j--) {
+        // Ignore non-alphabetic characters
+        while (!isalpha(input[i])) {
+            i++;
+        }
+        while (!isalpha(input[j])) {
+            j--;
+        }
+
+        if (input[i] != input[j]) {
+            isPalindrome = 0;
+            break;
+        }
+    }
+
+    // Display the result
+    if (isPalindrome) {
+        printf("'%s' is a palindrome.\n", input);
+    } else {
+        printf("'%s' is not a palindrome.\n", input);
+    }
+
+    return 0;
+}
